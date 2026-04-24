@@ -6,6 +6,7 @@
     <title>FlowThread | Where work conversations become finished tasks automatically</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         body { font-family: 'Inter', sans-serif; }
         .gradient-text {
@@ -13,9 +14,15 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .hidden { display: none; }
     </style>
 </head>
+
 <body class="bg-slate-50 text-slate-900 antialiased">
+
+<!-- ================= LANDING PAGE ================= -->
+<div id="landing">
+
     <!-- Navbar -->
     <nav class="fixed top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -25,120 +32,93 @@
                 </div>
                 <span class="text-xl font-extrabold tracking-tight text-slate-900">FlowThread</span>
             </div>
-            <a href="#cta" class="rounded-full bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-200 transition-all hover:bg-indigo-700 hover:shadow-indigo-300 active:scale-95">
-                Join Beta
-            </a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
-        <div class="mx-auto max-w-7xl px-6 text-center">
-            <h1 class="mx-auto max-w-4xl text-5xl font-extrabold tracking-tight text-slate-900 sm:text-7xl">
-                Where work conversations become <span class="gradient-text">finished tasks</span> automatically
-            </h1>
-            <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-                The all-in-one workspace for freelancers and clients. Stop juggling 5 different apps. Chat, manage tasks, and get paid in one place.
-            </p>
-            <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <a href="#cta" class="w-full rounded-2xl bg-indigo-600 px-8 py-4 text-lg font-bold text-white shadow-xl shadow-indigo-200 transition-all hover:bg-indigo-700 hover:shadow-indigo-300 active:scale-95 sm:w-auto">
-                    Get Early Access
-                </a>
-                <a href="#how-it-works" class="w-full rounded-2xl bg-white px-8 py-4 text-lg font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all hover:bg-slate-50 sm:w-auto">
-                    How it works
-                </a>
-            </div>
-        </div>
+    <!-- Hero -->
+    <section class="pt-32 pb-20 text-center">
+        <h1 class="text-5xl font-extrabold">
+            Where work conversations become <span class="gradient-text">finished tasks</span>
+        </h1>
 
-        <!-- Mockup -->
-        <div class="mx-auto mt-20 max-w-6xl px-6">
-            <div class="relative rounded-3xl bg-white p-2 shadow-2xl ring-1 ring-slate-200">
-                <img src="https://picsum.photos/seed/flowthread-ui/1200/800" alt="FlowThread Dashboard Mockup" class="rounded-2xl shadow-inner" referrerPolicy="no-referrer">
-                <div class="absolute -bottom-6 -right-6 hidden h-32 w-32 items-center justify-center rounded-3xl bg-indigo-600 text-5xl shadow-2xl lg:flex">
-                    🚀
-                </div>
-            </div>
+        <p class="mt-6 text-slate-600 max-w-2xl mx-auto">
+            Chat, manage tasks, and get paid in one place.
+        </p>
+
+        <div class="mt-10">
+            <button onclick="openApp()" 
+                class="rounded-2xl bg-indigo-600 px-8 py-4 text-lg font-bold text-white shadow-xl hover:bg-indigo-700">
+                Get Early Access
+            </button>
         </div>
     </section>
 
-    <!-- How it Works -->
-    <section id="how-it-works" class="bg-white py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6">
-            <div class="text-center">
-                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Built for the modern workflow</h2>
-                <p class="mt-4 text-lg text-slate-600">Three simple steps to go from "hello" to "paid".</p>
-            </div>
+</div>
 
-            <div class="mt-20 grid gap-12 lg:grid-cols-3 lg:gap-8">
-                <!-- Step 1 -->
-                <div class="relative flex flex-col items-center text-center">
-                    <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 text-3xl text-indigo-600 ring-1 ring-indigo-200">
-                        📝
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900">1. Post a Gig</h3>
-                    <p class="mt-4 text-slate-600">Clients post what they need. Freelancers browse and apply with one click. Simple, fast, and transparent.</p>
-                </div>
+<!-- ================= APP / CHAT UI ================= -->
+<div id="app" class="hidden min-h-screen flex flex-col">
 
-                <!-- Step 2 -->
-                <div class="relative flex flex-col items-center text-center">
-                    <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 text-3xl text-indigo-600 ring-1 ring-indigo-200">
-                        💬
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900">2. Accept & Chat</h3>
-                    <p class="mt-4 text-slate-600">Start a dedicated thread. Our AI-assisted chat helps you turn conversation points into actionable tasks within the same window.</p>
-                </div>
+    <!-- Header -->
+    <div class="p-4 bg-white border-b flex justify-between items-center">
+        <h2 class="font-bold text-lg">FlowThread AI Chat</h2>
+        <button onclick="backToLanding()" class="text-indigo-600 font-semibold">
+            ← Back
+        </button>
+    </div>
 
-                <!-- Step 3 -->
-                <div class="relative flex flex-col items-center text-center">
-                    <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 text-3xl text-indigo-600 ring-1 ring-indigo-200">
-                        💰
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900">3. Pay & Deliver</h3>
-                    <p class="mt-4 text-slate-600">Deliver work directly in the chat. Clients pay securely via Stripe. Funds are released instantly upon approval.</p>
-                </div>
-            </div>
+    <!-- Chat box -->
+    <div class="flex-1 p-4 flex flex-col gap-3">
+        <div id="chatBox" class="flex-1 overflow-auto space-y-2"></div>
+
+        <div class="flex gap-2">
+            <input id="msg" type="text" placeholder="Type your message..."
+                class="flex-1 border p-3 rounded-xl">
+
+            <button onclick="sendMessage()"
+                class="bg-indigo-600 text-white px-6 rounded-xl">
+                Send
+            </button>
         </div>
-    </section>
+    </div>
 
-    <!-- CTA Section -->
-    <section id="cta" class="bg-indigo-600 py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6">
-            <div class="relative isolate overflow-hidden bg-indigo-700 px-6 py-24 text-center shadow-2xl sm:rounded-3xl sm:px-16">
-                <h2 class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                    Ready to streamline your work?
-                </h2>
-                <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-indigo-100">
-                    Join our private beta and be the first to experience the future of freelance collaboration.
-                </p>
-                <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="#" class="rounded-xl bg-white px-8 py-4 text-lg font-bold text-indigo-600 shadow-sm hover:bg-indigo-50 active:scale-95">
-                        Join Beta – Get Early Access
-                    </a>
-                </div>
-                <svg viewBox="0 0 1024 1024" class="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]" aria-hidden="true">
-                    <circle cx="512" cy="512" r="512" fill="url(#827591b1-ce4c-446f-b71c-44627558362c)" fill-opacity="0.7" />
-                    <defs>
-                        <radialGradient id="827591b1-ce4c-446f-b71c-44627558362c">
-                            <stop stop-color="#7775D6" />
-                            <stop offset="1" stop-color="#E935C1" />
-                        </radialGradient>
-                    </defs>
-                </svg>
-            </div>
-        </div>
-    </section>
+</div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-50 py-12">
-        <div class="mx-auto max-w-7xl px-6 text-center">
-            <div class="flex items-center justify-center gap-2">
-                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-lg text-white">
-                    🧵
-                </div>
-                <span class="text-lg font-bold text-slate-900">FlowThread</span>
-            </div>
-            <p class="mt-4 text-sm text-slate-500">&copy; 2026 FlowThread. All rights reserved.</p>
-        </div>
-    </footer>
+<script>
+function openApp() {
+    document.getElementById("landing").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+}
+
+function backToLanding() {
+    document.getElementById("app").classList.add("hidden");
+    document.getElementById("landing").classList.remove("hidden");
+}
+
+async function sendMessage() {
+    const input = document.getElementById("msg");
+    const chatBox = document.getElementById("chatBox");
+
+    const text = input.value;
+    if (!text) return;
+
+    chatBox.innerHTML += `<div><b>You:</b> ${text}</div>`;
+    input.value = "";
+
+    const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
+    });
+
+    const data = await res.json();
+
+    const reply =
+        data?.candidates?.[0]?.content?.parts?.[0]?.text
+        || "No response";
+
+    chatBox.innerHTML += `<div><b>AI:</b> ${reply}</div>`;
+}
+</script>
+
 </body>
 </html>
