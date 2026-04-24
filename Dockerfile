@@ -9,6 +9,9 @@ COPY . .
 
 RUN npm run build
 
+# install static server + express for AI API
+RUN npm install express serve-static
+
 EXPOSE 8080
 
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
