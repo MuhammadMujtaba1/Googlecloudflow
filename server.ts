@@ -35,13 +35,15 @@ app.post("/api/ai", async (req, res) => {
 
     const data = await response.json();
     res.json(data);
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
 });
 
 /* ---------------- SERVE FRONTEND ---------------- */
-const distPath = path.join(__dirname, "dist");
+
+// ✅ FIXED LINE (IMPORTANT)
+const distPath = path.join(process.cwd(), "dist");
 
 app.use(express.static(distPath));
 
